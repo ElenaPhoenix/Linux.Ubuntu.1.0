@@ -1,0 +1,70 @@
+1. Вывести на экран 3 раза имя пользователя, от которого запускается команда.
+elena@phoenix-linux:~$ touch hw4
+elena@phoenix-linux:~$ nano hw4
+elena@phoenix-linux:~$ chmod +x hw4
+elena@phoenix-linux:~$ ll -la
+итого 128
+drwxr-x--- 15 elena elena  4096 мая 24 20:12  ./
+drwxr-xr-x  4 root  root   4096 мая 24 00:38  ../
+-rw-------  1 elena elena  4698 мая 24 02:43  .bash_history
+-rw-r--r--  1 elena elena   220 мая 22 16:39  .bash_logout
+-rw-r--r--  1 elena elena  3771 мая 22 16:39  .bashrc
+drwx------ 13 elena elena  4096 мая 22 17:49  .cache/
+drwx------ 15 elena elena  4096 мая 22 17:55  .config/
+-rwxrwxr-x  1 elena elena   764 мая 24 20:01  gessNumber*
+-rwxrwxr-x  1 elena elena    57 мая 24 20:12  hw4*
+-rw-------  1 elena elena    20 мая 24 01:40  .lesshst
+drwx------  3 elena elena  4096 мая 22 16:48  .local/
+-rw-rw-r--  1 elena elena     0 мая 24 00:22  newFile1
+-rw-------  1 elena elena     0 мая 24 00:29  newFile2
+-rw-r--r--  1 elena elena   807 мая 22 16:39  .profile
+drwxrwx---  1 root  vboxsf 4096 мая 24 17:05  shared/
+drwx------  3 elena elena  4096 мая 22 16:48  snap/
+-rw-r--r--  1 elena elena     0 мая 22 17:26  .sudo_as_admin_successful
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-clipboard-tty2-control.pid
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-clipboard-tty2-service.pid
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-draganddrop-tty2-control.pid
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-draganddrop-tty2-service.pid
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-hostversion-tty2-control.pid
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-seamless-tty2-control.pid
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-seamless-tty2-service.pid
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-vmsvga-session-tty2-control.pid
+-rw-r-----  1 elena elena     5 мая 24 18:40  .vboxclient-vmsvga-session-tty2-service.pid
+drwxr-xr-x  2 elena elena  4096 мая 22 16:48  Видео/
+drwxr-xr-x  2 elena elena  4096 мая 22 16:48  Документы/
+drwxr-xr-x  2 elena elena  4096 мая 22 16:48  Загрузки/
+drwxr-xr-x  2 elena elena  4096 мая 22 16:48  Изображения/
+drwxr-xr-x  2 elena elena  4096 мая 22 16:48  Музыка/
+drwxr-xr-x  2 elena elena  4096 мая 22 16:48  Общедоступные/
+drwxr-xr-x  2 elena elena  4096 мая 22 16:48 'Рабочий стол'/
+drwxr-xr-x  2 elena elena  4096 мая 22 16:48  Шаблоны/
+elena@phoenix-linux:~$ nano hw4
+elena@phoenix-linux:~$ ./hw4
+elena
+elena
+elena
+
+2. Вывести с помощью цикла while все четные числа от 0 до 100 включительно.
+elena@phoenix-linux:~$ ./hw4
+elena
+elena
+elena
+0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50 52 54 56 58 60 62 64 66 68 70 72 74 76 78 80 82 84 86 88 90 92 94 96 98 100
+
+3.* Командой 'cut' вывести для текущей папки права доступа файлов (первая колонка вывода команды ‘ll’). Отсортировать этот вывод (команда ‘sort’). Удалить дубликаты (команда ‘uniq’). Использовать для решения конвейер обработки задач (pipeline - вертикальный слэш).
+elena@phoenix-linux:~$ ll | cut -f 1 -d " "|sort|uniq
+drwx------
+drwxrwx---
+drwxr-x---
+drwxr-xr-x
+-rw-------
+-rw-r-----
+-rw-r--r--
+-rw-rw-r--
+-rwxrwxr-x
+итого
+
+
+
+
+

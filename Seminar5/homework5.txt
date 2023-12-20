@@ -1,0 +1,179 @@
+1. Подключить репозиторий с nginx любым удобным способом, установить nginx и потом удалить nginx, используя утилиту dpkg.
+elena@phoenix-linux:~$ sudo apt install curl gnupg2 ca-certificates lsb-release ubuntu-keyring
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Уже установлен пакет lsb-release самой новой версии (11.1.0ubuntu4).
+lsb-release помечен как установленный вручную.
+Уже установлен пакет ubuntu-keyring самой новой версии (2021.03.26).
+ubuntu-keyring помечен как установленный вручную.
+Уже установлен пакет ca-certificates самой новой версии (20211016ubuntu0.22.04.1).
+ca-certificates помечен как установленный вручную.
+Следующие НОВЫЕ пакеты будут установлены:
+  curl gnupg2
+Обновлено 0 пакетов, установлено 2 новых пакетов, для удаления отмечено 0 пакетов, и 12 пакетов не обновлено.
+Необходимо скачать 200 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 506 kB.
+Хотите продолжить? [Д/н] y
+Пол:1 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main amd64 curl amd64 7.81.0-1ubuntu1.10 [194 kB]
+Пол:2 http://ru.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 gnupg2 all 2.2.27-3ubuntu2.1 [5 548 B]
+Получено 200 kB за 1с (340 kB/s)      
+Выбор ранее не выбранного пакета curl.
+(Чтение базы данных … на данный момент установлено 185785 файлов и каталогов.)
+Подготовка к распаковке …/curl_7.81.0-1ubuntu1.10_amd64.deb …
+Распаковывается curl (7.81.0-1ubuntu1.10) …
+Выбор ранее не выбранного пакета gnupg2.
+Подготовка к распаковке …/gnupg2_2.2.27-3ubuntu2.1_all.deb …
+Распаковывается gnupg2 (2.2.27-3ubuntu2.1) …
+Настраивается пакет gnupg2 (2.2.27-3ubuntu2.1) …
+Настраивается пакет curl (7.81.0-1ubuntu1.10) …
+Обрабатываются триггеры для man-db (2.10.2-1) …
+elena@phoenix-linux:~$ curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+    | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1561  100  1561    0     0   2729      0 --:--:-- --:--:-- --:--:--  2729
+elena@phoenix-linux:~$ gpg --dry-run --quiet --no-keyring --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
+pub   rsa2048 2011-08-19 [SC] [годен до: 2024-06-14]
+      573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
+uid                      nginx signing key <signing-key@nginx.com>
+elena@phoenix-linux:~$ echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+    | sudo tee /etc/apt/sources.list.d/nginx.list
+deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu jammy nginx
+elena@phoenix-linux:~$ sudo apt update
+Сущ:1 http://ru.archive.ubuntu.com/ubuntu jammy InRelease
+Пол:2 http://ru.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+Пол:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]   
+Пол:4 http://ru.archive.ubuntu.com/ubuntu jammy-backports InRelease [108 kB]                               
+Пол:5 http://nginx.org/packages/ubuntu jammy InRelease [3 587 B]                                           
+Пол:6 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main i386 Packages [397 kB]
+Пол:7 http://security.ubuntu.com/ubuntu jammy-security/main i386 Packages [216 kB]
+Пол:8 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [612 kB]             
+Пол:9 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [172 kB]                       
+Пол:10 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main amd64 DEP-11 Metadata [101 kB]               
+Пол:11 http://nginx.org/packages/ubuntu jammy/nginx amd64 Packages [12,9 kB]                               
+Пол:12 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [14,6 kB]               
+Пол:13 http://ru.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [269 kB]
+Пол:14 http://ru.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [39,8 kB]
+Пол:15 http://ru.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [902 kB]
+Пол:16 http://ru.archive.ubuntu.com/ubuntu jammy-updates/universe i386 Packages [614 kB]
+Пол:17 http://ru.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [186 kB]                
+Пол:18 http://ru.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 DEP-11 Metadata [269 kB]           
+Пол:19 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [394 kB]                       
+Пол:20 http://ru.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [18,9 kB]           
+Пол:21 http://ru.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 DEP-11 Metadata [940 B]     
+Пол:22 http://ru.archive.ubuntu.com/ubuntu jammy-backports/main amd64 DEP-11 Metadata [7 992 B]       
+Пол:23 http://ru.archive.ubuntu.com/ubuntu jammy-backports/universe i386 Packages [13,9 kB]           
+Пол:24 http://ru.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [23,4 kB]          
+Пол:25 http://ru.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 DEP-11 Metadata [16,9 kB] 
+Пол:26 http://ru.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [548 B]     
+Пол:27 http://security.ubuntu.com/ubuntu jammy-security/main amd64 DEP-11 Metadata [41,5 kB]         
+Пол:28 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [9 880 B]
+Пол:29 http://security.ubuntu.com/ubuntu jammy-security/universe i386 Packages [530 kB]
+Пол:30 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [728 kB]
+Пол:31 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [127 kB]
+Пол:32 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 DEP-11 Metadata [19,1 kB]
+Пол:33 http://security.ubuntu.com/ubuntu jammy-security/universe DEP-11 48x48 Icons [16,5 kB]
+Пол:34 http://security.ubuntu.com/ubuntu jammy-security/universe DEP-11 64x64 Icons [26,3 kB]
+Пол:35 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [14,6 kB]
+Получено 6 135 kB за 6с (1 078 kB/s)                                      
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Может быть обновлено 13 пакетов. Запустите «apt list --upgradable» для их показа.
+N: Пропускается получение настроенного файла «nginx/binary-i386/Packages», так как репозиторий «http://nginx.org/packages/ubuntu jammy InRelease» не поддерживает архитектуру «i386»
+elena@phoenix-linux:~$ sudo apt install nginx
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Следующие НОВЫЕ пакеты будут установлены:
+  nginx
+Обновлено 0 пакетов, установлено 1 новых пакетов, для удаления отмечено 0 пакетов, и 13 пакетов не обновлено.
+Необходимо скачать 1 012 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 3 283 kB.
+Пол:1 http://nginx.org/packages/ubuntu jammy/nginx amd64 nginx amd64 1.24.0-1~jammy [1 012 kB]
+Получено 1 012 kB за 1с (879 kB/s)  
+Выбор ранее не выбранного пакета nginx.
+(Чтение базы данных … на данный момент установлено 185798 файлов и каталогов.)
+Подготовка к распаковке …/nginx_1.24.0-1~jammy_amd64.deb …
+----------------------------------------------------------------------
+
+Thanks for using nginx!
+
+Please find the official documentation for nginx here:
+* https://nginx.org/en/docs/
+Please subscribe to nginx-announce mailing list to get
+the most important news about nginx:
+* https://nginx.org/en/support.html
+
+Commercial subscriptions for nginx are available on:
+* https://nginx.com/products/
+
+----------------------------------------------------------------------
+Распаковывается nginx (1.24.0-1~jammy) …
+Настраивается пакет nginx (1.24.0-1~jammy) …
+Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /lib/systemd/system/nginx.service.
+Обрабатываются триггеры для man-db (2.10.2-1) …
+elena@phoenix-linux:~$ sudo dpkg -r nginx
+(Чтение базы данных … на данный момент установлено 185832 файла и каталога.)
+Удаляется nginx (1.24.0-1~jammy) …
+Обрабатываются триггеры для man-db (2.10.2-1) …
+elena@phoenix-linux:~$ sudo apt autoremove
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Обновлено 0 пакетов, установлено 0 новых пакетов, для удаления отмечено 0 пакетов, и 13 пакетов не обновлено.
+elena@phoenix-linux:~$ dpkg -l nginx
+Желаемый=неизвестно[u]/установить[i]/удалить[r]/вычистить[p]/зафиксировать[h]
+| Состояние=не[n]/установлен[i]/настроен[c]/распакован[U]/частично настроен[F]/
+            частично установлен[H]/trig-aWait/Trig-pend
+|/ Ошибка?=(нет)/требуется переустановка[R] (верхний регистр
+в полях состояния и ошибки указывает на ненормальную ситуацию)
+||/ Имя            Версия         Архитектура  Описание
++++-==============-==============-============-=================================
+rc  nginx          1.24.0-1~jammy amd64        high performance web server
+elena@phoenix-linux:~$ sudo dpkg --purge nginx
+(Чтение базы данных … на данный момент установлено 185812 файлов и каталогов.)
+Вычищаются файлы настройки пакета nginx (1.24.0-1~jammy) …
+elena@phoenix-linux:~$ sudo apt list nginx
+Вывод списка… Готово
+nginx/stable 1.24.0-1~jammy amd64
+N: Есть 5 дополнительных версий. Используйте «-a» для их просмотра.
+
+2. Установить пакет на свой выбор, используя snap.
+elena@phoenix-linux:/etc/apt/sources.list.d$ snap search
+Поисковый запрос пуст. Но имеются некоторые snap-пакеты, которые могут вас заинтересовать:
+
+Название     Версия                            Издатель               Примечание  Описание
+jami         20230323.0                        sfljami                -           Privacy-oriented voice, video, chat, and conference platform and SIP phone
+krita        5.1.5                             krita✓                 -           Digital Painting, Creative Freedom
+thunderbird  102.10.1-1                        canonical✓             -           Mozilla Thunderbird email application
+notepadqq    1.4.8                             danieleds              -           A Notepad++-like editor for Linux.
+postman      10.14.2                           postman-inc✓           -           API Development Environment
+mailspring   1.10.8                            foundry376✓            -           The best email app for people and teams at work
+spotify      1.2.11.916.geb595a67              spotify✓               -           Music for everyone
+slack        4.32.122                          slack✓                 -           Team communication for the 21st century.
+foobar2000   2.0                               mmtrt                  -           foobar2000 is an advanced freeware audio player.
+gimp         2.10.30                           snapcrafters           -           GNU Image Manipulation Program
+hugo         0.112.3                           hugo-authors           -           Fast and Flexible Static Site Generator
+inkscape     1.2.2-732a01da63-2022-12-09-cust  inkscape✓              -           Vector Graphics Editor
+juju         2.9.42                            canonical✓             classic     Juju - a model-driven operator lifecycle manager for K8s and machines
+skype        8.98.0.206                        skype✓                 -           Connect, Create, Talk & Discover, now with Bing GPT-4
+litteris     master                            raibtoffoletto         -           Penpal Correspondence Organized
+musescore    3.6.2                             musescore✓             -           Create, play and print beautiful sheet music.
+newsboat     r2.31                             minoru                 -           An RSS/Atom feed reader for text terminals
+kdenlive     23.04.1                           kde✓                   -           Video Editor
+qownnotes    23.5.3                            pbek                   -           Plain-text file markdown note taking with Nextcloud/ownCloud integration
+retroarch    1.15.0                            libretro               -           RetroArch is the official reference frontend for the libretro API.
+audacity     3.1.3                             lucyllewy✪             -           Audio software for multi-track recording and editing
+bitwarden    2023.4.0                          bitwarden✓             -           Bitwarden
+obs-studio   27.1.3                            snapcrafters           -           Free and open source software for live streaming and screen recording
+gitkraken    9.4.0                             gitkraken✓             classic     For repo management, in-app code editing & issue tracking.
+keepassxc    2.7.4                             keepassxreboot         -           Community-driven port of the Windows application “KeePass Password Safe”
+vlc          3.0.18                            videolan✓              -           The ultimate media player
+powershell   7.3.4                             microsoft-powershell✓  classic     PowerShell for every system!
+Введите поисковый запрос так, чтобы результаты поиска были наиболее точны.
+elena@phoenix-linux:/etc/apt/sources.list.d$ sudo snap install foobar2000
+foobar2000 2.0 от Taqi Raza (mmtrt) установлен
+
