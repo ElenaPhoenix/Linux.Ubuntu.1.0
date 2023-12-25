@@ -1,4 +1,4 @@
-sudo apt update - при каждом включении системы + создание снимков при каждом выключении
+﻿sudo apt update - при каждом включении системы + создание снимков при каждом выключении
 sudo apt upgrage - раз в неделю
 sudo reboot - перезагрузка
 
@@ -161,7 +161,8 @@ systemctl start apache2
 systemctl status apache2 - просмотр статуса соединения
 sudo systemctl reload apache2
 Корректность конфигурации веб сервера Apache можно проверять командой 'apachectl -t'.
-
+sudo systemctl stop nginx
+sudo systemctl stop apache2
 
 apt install php8.1 libapache2-mod-php8.1
 apt install php8.1-fpm
@@ -224,15 +225,7 @@ docker run hello-world
 https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker-compose#step-1-defining-the-web-server-configuration
 wordpress - конструктор сайтов
 
-ПРИНЯТО
-на 80 порту - сайты
-на 22 порту - ssh
-на 443 порту - https
 
-sudo docker-compose ps
-petproject.ru
-elena
-27Phoenix!pt08
 
 sudo docker search ubuntu
 sudo docker run ubuntu
